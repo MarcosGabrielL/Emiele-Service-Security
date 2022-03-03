@@ -39,6 +39,11 @@
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-starter-security</artifactId>
                 </dependency>
+                <dependency>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-context-support</artifactId>
+                    <version>3.2.8.RELEASE</version>
+                </dependency>
 		<dependency>
 			<groupId>com.microsoft.sqlserver</groupId>
 			<artifactId>mssql-jdbc</artifactId>
@@ -128,7 +133,13 @@
                     <artifactId>joda-time</artifactId>
                     <version>2.10.12</version>
                 </dependency>
-	</dependencies>
+                <dependency>
+                    <groupId>javax.mail</groupId>
+                    <artifactId>mail</artifactId>
+                    <version>1.5.0-b01</version>
+                </dependency>
+            </dependencies>
+                
 
 	<build>
 		<plugins>

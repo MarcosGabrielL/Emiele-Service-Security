@@ -28,17 +28,21 @@ public class User {
      
     @Column(name = "last_name", nullable = false, length = 20)
     private String lastName;
+    
+    @Column(name = "verify", nullable = false)
+    private boolean verify;
 
     public User() {
         super();
     }
 
-    public User(Long id, String email, String password, String firstName, String lastName) {
+    public User(Long id, String email, String password, String firstName, String lastName, Boolean verify) {
         this.id = id;
         this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.verify = verify;
     }
 
     public Long getId() {
@@ -104,6 +108,14 @@ public class User {
             return false;
         }
         return true;
+    }
+
+    public boolean isVerify() {
+        return verify;
+    }
+
+    public void setVerify(boolean verify) {
+        this.verify = verify;
     }
      
     
