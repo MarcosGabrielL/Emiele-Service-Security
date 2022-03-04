@@ -1,0 +1,38 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.softsaj.gibgassecurity.PasswordReset;
+
+import com.softsaj.gibgassecurity.exception.NotFoundException;
+import com.softsaj.gibgassecurity.security.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+
+/**
+ *
+ * @author Marcos
+ */
+@Service
+public class PasswordResetServices {
+    
+     @Autowired
+    private PasswordRepository customerRepo;
+     
+     public PasswordResetToken updateResetPasswordToken(String token, String email) throws NotFoundException {
+        PasswordResetToken customer = new PasswordResetToken();
+        
+            customer.setResetPasswordToken(token);
+            customer.setId(email);
+          return  customerRepo.save(customer);
+        
+    }
+     
+    public PasswordResetToken getByResetPasswordToken(String token) {
+        return customerRepo.findByResetPasswordToken(token)
+                .orElseThrow(() -> new NotFoundException("This token was not found"));
+    }
+     
+   
+}

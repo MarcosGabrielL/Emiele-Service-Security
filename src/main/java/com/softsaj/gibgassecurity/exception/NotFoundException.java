@@ -21,5 +21,9 @@ public class NotFoundException extends RuntimeException {
         return super.getMessage(); //To change body of generated methods, choose Tools | Templates.
     }
     
+    public NotFoundException(String message) {
+        super(message);
+    }
+    
     
 }

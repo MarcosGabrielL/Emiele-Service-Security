@@ -11,6 +11,10 @@ package com.softsaj.gibgassecurity.security;
  */
 import com.softsaj.gibgassecurity.EmailVerification.EmailSender;
 import com.softsaj.gibgassecurity.EmailVerification.EmailService;
+import com.softsaj.gibgassecurity.PasswordReset.GenericResponse;
+import com.softsaj.gibgassecurity.PasswordReset.PasswordResetServices;
+import com.softsaj.gibgassecurity.PasswordReset.PasswordResetToken;
+import com.softsaj.gibgassecurity.exception.UserNotFoundException;
 import com.softsaj.gibgassecurity.models.Person;
 import com.softsaj.gibgassecurity.security.UserRepository;
 import com.softsaj.gibgassecurity.security.AuthRequest;
@@ -20,7 +24,11 @@ import com.softsaj.gibgassecurity.services.PersonService;
 import com.softsaj.gibgassecurity.repositories.PersonRepository;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Locale;
+import java.util.UUID;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -32,8 +40,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.SimpleMailMessage;
 
-@CrossOrigin(origins = "http://localhost:4200")
+
 @RestController
 public class AppController {
     
@@ -48,7 +57,11 @@ public class AppController {
     @Autowired
     private AuthenticationManager authenticationManager;
     @Autowired
-    private EmailSender emailSender;;
+    private EmailSender emailSender;
+     @Autowired
+    private MessageSource messages;
+     @Autowired
+    private PasswordResetServices customerService;
 
 	
     @GetMapping("")
@@ -140,7 +153,7 @@ person.setLastName(user.getLastName());
             throw new Exception("invalid request to email", ex.getCause());
         }
         
-         String link = "http://localhost:8080/confirm?token=" + jwtUtil.generateToken(authRequest.getEmail()) +"&email="+authRequest.getEmail();
+         String link = "https://emiele.herokuapp.com/confirm?token=" + jwtUtil.generateToken(authRequest.getEmail()) +"&email="+authRequest.getEmail();
         emailSender.send(
                 authRequest.getEmail(),
                 buildEmail(userRepo.findByEmail(authRequest.getEmail()).getFirstName(), link));
@@ -244,6 +257,7 @@ person.setLastName(user.getLastName());
     }
     
     
-    
+  /* RESET PASSWORD */
+   
     
 }

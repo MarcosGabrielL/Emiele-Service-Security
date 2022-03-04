@@ -9,6 +9,7 @@ package com.softsaj.gibgassecurity.security;
  *
  * @author Marcos
  */
+import com.softsaj.gibgassecurity.PasswordReset.PasswordResetToken;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -45,9 +46,9 @@ public class JwtUtil {
         return extractExpiration(token).before(new Date());
     }
 
-    public String generateToken(String username) {
+    public String generateToken(String email) {
         Map<String, Object> claims = new HashMap<>();
-        return createToken(claims, username);
+        return createToken(claims, email);
     }
 
     private String createToken(Map<String, Object> claims, String subject) {
@@ -61,4 +62,11 @@ public class JwtUtil {
         final String username = extractUsername(token);
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
+    
+    public Boolean validateToken(String token, String email) {
+        final String tokenemail = extractUsername(token);
+        return (tokenemail.equals(email) && !isTokenExpired(token));
+    }
+    
+   
 }
