@@ -21,9 +21,9 @@ import javax.mail.internet.MimeMessage;
 
 @Service
 @AllArgsConstructor
-public class EmailService implements EmailSender {
+public class EmailService1 implements EmailSender {
 
-    private final static Logger LOGGER = LoggerFactory.getLogger(EmailService.class);
+    private final static Logger LOGGER = LoggerFactory.getLogger(EmailService1.class);
 
     private final JavaMailSender mailSender;
 
@@ -35,7 +35,7 @@ public class EmailService implements EmailSender {
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "utf-8");
             helper.setText(email, true);
             helper.setTo(to);
-            helper.setSubject("Confirme seu e-mail - Emiele");
+            helper.setSubject("Atualize seu Password - Emiele");
             helper.setFrom("tesrtddtfor@gmail.com");
             mailSender.send(mimeMessage);
         } catch (MessagingException e) {

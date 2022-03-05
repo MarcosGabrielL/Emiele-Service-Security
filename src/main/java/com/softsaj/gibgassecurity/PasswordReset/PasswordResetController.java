@@ -1,7 +1,7 @@
 package com.softsaj.gibgassecurity.PasswordReset;
 
 
-import com.softsaj.gibgassecurity.EmailVerification.EmailSender;
+import com.softsaj.gibgassecurity.EmailVerification.EmailService1;
 import com.softsaj.gibgassecurity.exception.NotFoundException;
 import com.softsaj.gibgassecurity.security.JwtUtil;
 import com.softsaj.gibgassecurity.security.User;
@@ -31,7 +31,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 public class PasswordResetController {
     
     @Autowired
-    private EmailSender emailSender;
+    private EmailService1 emailSender;
      
     @Autowired
     private PasswordResetServices customerService;
@@ -59,7 +59,7 @@ public String processForgotPassword( @RequestParam("email") String email) {
         String token = jwtUtil.generateToken(email);
         
         customerService.updateResetPasswordToken(token, email);
-        String resetPasswordLink = "https://emiele.herokuapp.com/reset_password?token=" + token;
+        String resetPasswordLink = "https://emiele.herokuapp.com/reset_password?token=" + token + "&email="+email;
         
         emailSender.send(
                 email,
@@ -106,7 +106,7 @@ public String processResetPassword(@RequestParam("token") String token,
         User newUser = userRepo.save(user);
         
         //Apaga token
-        customerService.updateResetPasswordToken(token, email);
+        customerService.deleteResetPasswordToken(token, email);
          
      }
      

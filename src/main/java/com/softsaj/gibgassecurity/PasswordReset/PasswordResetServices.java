@@ -7,6 +7,7 @@ package com.softsaj.gibgassecurity.PasswordReset;
 import com.softsaj.gibgassecurity.exception.NotFoundException;
 import com.softsaj.gibgassecurity.security.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -34,5 +35,16 @@ public class PasswordResetServices {
                 .orElseThrow(() -> new NotFoundException("This token was not found"));
     }
      
+   public void deleteResetPasswordToken(String token, String email) throws NotFoundException {
+        PasswordResetToken customer = new PasswordResetToken();
+        
+            customer.setResetPasswordToken(token);
+            customer.setId(email);
+          try{ customerRepo.delete(customer);
+          }catch(DataIntegrityViolationException e){
+            throw new DataIntegrityViolationException(
+                    "Não foi possivel deletar o Person");
+        }
+   }
    
 }
