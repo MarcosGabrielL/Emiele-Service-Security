@@ -35,7 +35,7 @@ public class EmailService implements EmailSender {
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "utf-8");
             helper.setText(email, true);
             helper.setTo(to);
-            helper.setSubject("Confirme seu e-mail - Emiele");
+            helper.setSubject("Informações - Emiele");
             helper.setFrom("tesrtddtfor@gmail.com");
             mailSender.send(mimeMessage);
         } catch (MessagingException e) {

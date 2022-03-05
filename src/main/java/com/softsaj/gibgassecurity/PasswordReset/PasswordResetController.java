@@ -1,7 +1,8 @@
 package com.softsaj.gibgassecurity.PasswordReset;
 
 
-import com.softsaj.gibgassecurity.EmailVerification.EmailService1;
+
+import com.softsaj.gibgassecurity.EmailVerification.EmailSender;
 import com.softsaj.gibgassecurity.exception.NotFoundException;
 import com.softsaj.gibgassecurity.security.JwtUtil;
 import com.softsaj.gibgassecurity.security.User;
@@ -31,7 +32,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 public class PasswordResetController {
     
     @Autowired
-    private EmailService1 emailSender;
+    private EmailSender emailSender;
      
     @Autowired
     private PasswordResetServices customerService;
