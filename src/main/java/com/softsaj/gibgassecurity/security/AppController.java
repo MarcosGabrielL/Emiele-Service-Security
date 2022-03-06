@@ -257,7 +257,14 @@ person.setLastName(user.getLastName());
     }
     
     
-  /* RESET PASSWORD */
+  @GetMapping(path = "islogged")
+    public Boolean confirm(@RequestParam("token") String token){
+        if (jwtUtil.isTokenExpired(token)) {
+            throw new IllegalStateException("token expired");
+        }
+        
+        return true;
+    }
    
     
 }

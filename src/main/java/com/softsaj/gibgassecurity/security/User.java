@@ -31,18 +31,25 @@ public class User {
     
     @Column(name = "verify", nullable = false)
     private boolean verify;
+    
+    /*1-Vendedor
+      2-Entregador
+      3-Cliente*/
+    @Column(name = "tipo", nullable = true, length = 1)
+    private String tipo;
 
     public User() {
         super();
     }
 
-    public User(Long id, String email, String password, String firstName, String lastName, Boolean verify) {
+    public User(Long id, String email, String password, String firstName, String lastName, Boolean verify, String tipo) {
         this.id = id;
         this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.verify = verify;
+        this.tipo = tipo;
     }
 
     public Long getId() {
@@ -116,6 +123,14 @@ public class User {
 
     public void setVerify(boolean verify) {
         this.verify = verify;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
      
     
