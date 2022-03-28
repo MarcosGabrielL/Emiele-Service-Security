@@ -15,6 +15,7 @@ import com.softsaj.gibgassecurity.PasswordReset.GenericResponse;
 import com.softsaj.gibgassecurity.PasswordReset.PasswordResetServices;
 import com.softsaj.gibgassecurity.PasswordReset.PasswordResetToken;
 import com.softsaj.gibgassecurity.exception.UserNotFoundException;
+import com.softsaj.gibgassecurity.models.Evento;
 import com.softsaj.gibgassecurity.models.Person;
 import com.softsaj.gibgassecurity.security.UserRepository;
 import com.softsaj.gibgassecurity.security.AuthRequest;
@@ -22,10 +23,17 @@ import com.softsaj.gibgassecurity.security.User;
 import com.softsaj.gibgassecurity.security.JwtUtil;
 import com.softsaj.gibgassecurity.services.PersonService;
 import com.softsaj.gibgassecurity.repositories.PersonRepository;
+import com.softsaj.gibgassecurity.services.EventoService;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -116,7 +124,28 @@ person.setLastName(user.getLastName());
     //person.setNome(user.getFirstName()+" "+user.getLastName());
     personRepo.save(person);
     
-     
+     Locale locale = new Locale("pt","BR");
+                GregorianCalendar calendar = new GregorianCalendar();
+                SimpleDateFormat formatador = new SimpleDateFormat("YYYY-MM-dd hh:mm:ssXXX",locale);
+                SimpleDateFormat formatador1 = new SimpleDateFormat("YYYY-MM-dd",locale);
+                Date d = new Date();
+                String data = formatador.format(d.getTime());
+     Evento evento = new Evento();
+         evento.setCod("Reg1");
+         evento.setDate(data);
+         evento.setInfo("");
+         evento.setLevel("2");
+         evento.setMessage("Registro no Sistema");
+         evento.setUsuario(user.getId().toString());
+         
+         
+        try {
+            EventoService.SaveEvento(evento,"7");
+        } catch (IOException ex) {
+            Logger.getLogger(AppController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(AppController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     return new ResponseEntity<>(newUser, HttpStatus.CREATED);
 }
 
@@ -252,6 +281,29 @@ person.setLastName(user.getLastName());
         //ConfirmaEmail
         user.setVerify(true);
         User newUser = userRepo.save(user);
+        
+        Locale locale = new Locale("pt","BR");
+                GregorianCalendar calendar = new GregorianCalendar();
+                SimpleDateFormat formatador = new SimpleDateFormat("YYYY-MM-dd hh:mm:ssXXX",locale);
+                SimpleDateFormat formatador1 = new SimpleDateFormat("YYYY-MM-dd",locale);
+                Date d = new Date();
+                String data = formatador.format(d.getTime());
+         Evento evento = new Evento();
+         evento.setCod("Reg1");
+         evento.setDate(data);
+         evento.setInfo("");
+         evento.setLevel("2");
+         evento.setMessage("Confirmou Email");
+         evento.setUsuario(user.getId().toString());
+         
+         
+        try {
+            EventoService.SaveEvento(evento,"7");
+        } catch (IOException ex) {
+            Logger.getLogger(AppController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(AppController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         return true;
     }
