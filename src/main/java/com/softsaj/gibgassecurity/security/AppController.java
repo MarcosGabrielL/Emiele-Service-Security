@@ -166,7 +166,7 @@ person.setLastName(user.getLastName());
 
 @GetMapping("/user/id/{email}")
     public ResponseEntity<User> getUserById (@PathVariable("email") Long email) {
-        User user = userRepo.findById(email);
+        User user = userRepo.findByid(email);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
