@@ -164,6 +164,12 @@ person.setLastName(user.getLastName());
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
+@GetMapping("/user/id/{email}")
+    public ResponseEntity<User> getUserById (@PathVariable("email") Long email) {
+        User user = userRepo.findById(email);
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
     
      @PostMapping("/sendingemail")
     public String generateEmail(@RequestBody AuthRequest authRequest) throws Exception {
