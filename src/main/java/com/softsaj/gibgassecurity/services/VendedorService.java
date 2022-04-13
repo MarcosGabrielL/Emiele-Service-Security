@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.GetMapping;
  *
  * @author Marcos
  */
+import org.springframework.web.bind.annotation.CrossOrigin;
+
+@CrossOrigin("http://localhost:4200")
   @Service
 public class VendedorService {
     

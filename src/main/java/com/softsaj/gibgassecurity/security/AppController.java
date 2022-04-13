@@ -25,6 +25,7 @@ import com.softsaj.gibgassecurity.security.JwtUtil;
 import com.softsaj.gibgassecurity.services.PersonService;
 import com.softsaj.gibgassecurity.repositories.PersonRepository;
 import com.softsaj.gibgassecurity.services.EventoService;
+import com.softsaj.gibgassecurity.services.VendedorService;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -50,8 +51,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
-
+@CrossOrigin("http://localhost:4200")
 @RestController
 public class AppController {
     
@@ -71,6 +73,8 @@ public class AppController {
     private MessageSource messages;
      @Autowired
     private PasswordResetServices customerService;
+     @Autowired
+    private VendedorService VendedorService;
 
 	
     @GetMapping("")
@@ -123,6 +127,7 @@ public ResponseEntity<User> processRegister(@RequestBody User user) {
         vendedor.setEmail(newUser.getEmail());
         vendedor.setTelefone("+55 (75) 9 88525220");
         vendedor.setDescricao("Olá, sou "+vendedor.getNomefantasia()+" : Decisões: Se você não consegue decidir, a resposta é não. Se dois caminhos igualmente difíceis, escolha o mais doloroso a curto prazo (evitar a dor é criar uma ilusão de igualdade).");
+        VendedorService.addVendedor(vendedor);
     }
     if(user.getTipo().equals("2")){ //ENTREGADOR
         
