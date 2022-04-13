@@ -17,6 +17,7 @@ import com.softsaj.gibgassecurity.PasswordReset.PasswordResetToken;
 import com.softsaj.gibgassecurity.exception.UserNotFoundException;
 import com.softsaj.gibgassecurity.models.Evento;
 import com.softsaj.gibgassecurity.models.Person;
+import com.softsaj.gibgassecurity.models.Vendedor;
 import com.softsaj.gibgassecurity.security.UserRepository;
 import com.softsaj.gibgassecurity.security.AuthRequest;
 import com.softsaj.gibgassecurity.security.User;
@@ -108,21 +109,39 @@ public ResponseEntity<User> processRegister(@RequestBody User user) {
    // BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     //String encodedPassword = passwordEncoder.encode(user.getPassword());
     //user.setPassword(encodedPassword);
+    
+    //SALVA USUARIO
      user.setVerify(false);
     User newUser = userRepo.save(user);
     
-    //Cria Cinefilo
-    Person person = new Person();
-    person.setId(user.getId());
-person.setEmail(user.getEmail());
-person.setPassword(user.getPassword());
-person.setFirstName(user.getFirstName());
-person.setLastName(user.getLastName());
+    //SALVA MODEL
+    if(user.getTipo().equals("1")){ //VENDEDOR
+        Vendedor vendedor = new Vendedor();
+        vendedor.setId(newUser.getId());
+        vendedor.setNomefantasia(user.getFirstName() + " " + user.getLastName());
+        vendedor.setRua("Rua dos Bobos");
+        vendedor.setEmail(newUser.getEmail());
+        vendedor.setTelefone("+55 (75) 9 88525220");
+        vendedor.setDescricao("Olá, sou "+vendedor.getNomefantasia()+" : Decisões: Se você não consegue decidir, a resposta é não. Se dois caminhos igualmente difíceis, escolha o mais doloroso a curto prazo (evitar a dor é criar uma ilusão de igualdade).");
+    }
+    if(user.getTipo().equals("2")){ //ENTREGADOR
+        
+    }
+    if(user.getTipo().equals("3")){ //CLIENTE
+         Person person = new Person();
+        person.setId(newUser.getId());
+        person.setEmail(user.getEmail());
+        person.setPassword(user.getPassword());
+        person.setFirstName(user.getFirstName());
+        person.setLastName(user.getLastName());
+        personRepo.save(person);
+    }
+   
     //person.setEmail(user.getEmail());
     //person.setId(user.getId().intValue());
     //person.setUser(user.getFirstName());
     //person.setNome(user.getFirstName()+" "+user.getLastName());
-    personRepo.save(person);
+    
     
      Locale locale = new Locale("pt","BR");
                 GregorianCalendar calendar = new GregorianCalendar();

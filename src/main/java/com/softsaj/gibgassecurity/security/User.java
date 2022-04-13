@@ -35,7 +35,7 @@ public class User {
     /*1-Vendedor
       2-Entregador
       3-Cliente*/
-    @Column(name = "tipo", nullable = true, length = 1)
+    @Column(name = "tipo", nullable = false, length = 1)
     private String tipo;
 
     public User() {
