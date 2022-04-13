@@ -108,6 +108,7 @@ public class AppController {
         return "signupform";
     }
 
+@CrossOrigin("http://localhost:4200")
 @PostMapping("/process_register")
 public ResponseEntity<User> processRegister(@RequestBody User user) {
    // BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();

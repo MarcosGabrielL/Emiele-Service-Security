@@ -18,6 +18,6 @@ public interface VendedorRepository extends JpaRepository<Vendedor, Long> {
      
      void deleteVendedorById(Long id);
      
-     @Query("SELECT u FROM Vendedor u WHERE u.Email = ?1")
+     @Query("SELECT u FROM Vendedor u WHERE u.email = ?1")
       List<Vendedor> findByEmail(String usuario);
 }

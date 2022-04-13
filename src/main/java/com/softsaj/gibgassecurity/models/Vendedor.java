@@ -27,7 +27,7 @@ public class Vendedor {
      private String CNPJ;
      @Column(nullable = false, unique = true, length = 45)
         private String nomefantasia; 
-     @Column(nullable = false, unique = true, length = 200)
+     @Column(nullable = false, unique = true, length = 250)
            private String descricao;   
         private String Cidade;
         private String CEP;
