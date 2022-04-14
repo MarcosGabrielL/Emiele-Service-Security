@@ -73,7 +73,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
         // http.cors().disable();//.configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues());
 
 
-        http
+        http.cors().and()
 	  .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/islogged/**", "/forgot_password/**","/reset_password/**", "/register", "/*", "/user/**", "/cinefilos/**", "/textoes/**", "/files/**", "/file/**").permitAll()
