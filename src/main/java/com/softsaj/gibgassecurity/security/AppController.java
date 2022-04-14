@@ -51,10 +51,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
-import org.springframework.web.bind.annotation.CrossOrigin;
-
-
-@CrossOrigin
 @RestController
 public class AppController {
     
@@ -109,7 +105,6 @@ public class AppController {
         return "signupform";
     }
 
-@CrossOrigin("http://localhost:4200")
 @PostMapping("/process_register")
 public ResponseEntity<User> processRegister(@RequestBody User user) {
    // BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
