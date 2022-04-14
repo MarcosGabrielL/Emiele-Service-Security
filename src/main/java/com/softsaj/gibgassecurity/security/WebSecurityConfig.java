@@ -36,7 +36,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  
 @Configuration
 @EnableWebSecurity
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements WebMvcConfigurer{
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     
     
     @Autowired
@@ -59,12 +59,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
-    }
-    
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-                .allowedMethods("*");
     }
     
       @Bean

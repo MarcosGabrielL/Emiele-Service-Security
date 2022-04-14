@@ -29,7 +29,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;;
  *
  * @author Marcos
  */
-@CrossOrigin("http://localhost:4200")
 @RestController
 @RequestMapping("/vendedores")
 public class VendedorController {
