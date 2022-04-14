@@ -30,10 +30,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  
 @Configuration
 @EnableWebSecurity
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements WebMvcConfigurer{
     
     
     @Autowired
@@ -58,11 +60,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
     
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedMethods("*");
+    }
+    
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-         http.cors().disable();//.configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues());
+        // http.cors().disable();//.configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues());
 
 
         http
