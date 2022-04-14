@@ -25,21 +25,21 @@ public class Vendedor {
      
     
      private String CNPJ;
-     @Column(nullable = false, unique = true, length = 45)
+     @Column(nullable = false, unique = false, length = 45)
         private String nomefantasia; 
-     @Column(nullable = false, unique = true, length = 250)
+     @Column(nullable = false, unique = false, length = 250)
            private String descricao;   
         private String Cidade;
         private String CEP;
         private String CFOP;
      private String razaosocial;
-     @Column(nullable = false, unique = true, length = 45)
+     @Column(nullable = false, unique = false, length = 45)
     private String rua;
     private String Bairro;
     private String Numero;
     private String Estado;
     private String Uf;
-    @Column(nullable = false, unique = true, length = 45)
+    @Column(nullable = false, unique = false, length = 45)
     private String telefone;
       @Column(nullable = false, unique = true, length = 45)
     private String email;

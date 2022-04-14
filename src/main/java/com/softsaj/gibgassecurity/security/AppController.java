@@ -143,10 +143,6 @@ public ResponseEntity<User> processRegister(@RequestBody User user) {
         personRepo.save(person);
     }
    
-    //person.setEmail(user.getEmail());
-    //person.setId(user.getId().intValue());
-    //person.setUser(user.getFirstName());
-    //person.setNome(user.getFirstName()+" "+user.getLastName());
     
     
      Locale locale = new Locale("pt","BR");
@@ -155,6 +151,7 @@ public ResponseEntity<User> processRegister(@RequestBody User user) {
                 SimpleDateFormat formatador1 = new SimpleDateFormat("YYYY-MM-dd",locale);
                 Date d = new Date();
                 String data = formatador.format(d.getTime());
+                
      Evento evento = new Evento();
          evento.setCod("Reg1");
          evento.setDate(data);
