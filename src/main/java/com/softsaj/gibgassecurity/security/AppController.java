@@ -357,7 +357,7 @@ public ResponseEntity<User> processRegister(@RequestBody User user) {
          notification.setDate(date);
          notification.setInfo(info);
          notification.setLevel(level);
-         notification.setMessage("Novo Pedido: "+message);
+         notification.setMessage(message);
          notification.setUsuario(usuario);
          notification.setIsRead(false);
           
