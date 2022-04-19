@@ -74,8 +74,6 @@ public class AppController {
     private PasswordResetServices customerService;
      @Autowired
     private VendedorService VendedorService;
-     @Autowired
-     private NotificationService ns;
 
 	
     @GetMapping("")
@@ -365,7 +363,7 @@ public ResponseEntity<User> processRegister(@RequestBody User user) {
           
          
          try {
-          ns.addNotification(notification, "1");
+          NotificationService.addNotification(notification, "1");
         } catch (IOException ex) {
             Logger.getLogger(AppController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InterruptedException ex) {
