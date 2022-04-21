@@ -95,7 +95,7 @@ public class VendedorController {
         return new ResponseEntity<>(updateVendedor, HttpStatus.OK);
     }
     
-    @PutMapping("/vendedor/update/escolheu/{id}")
+    @PostMapping("/vendedor/update/escolheu/{id}")
     public ResponseEntity<Vendedor> updateVVendedor(@PathVariable("id") Long id, @RequestBody Vendedor newvendedor
             ,@RequestParam("token") String token){
         
