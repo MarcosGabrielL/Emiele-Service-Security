@@ -8,7 +8,12 @@ package com.softsaj.gibgassecurity.controllers;
 import com.softsaj.gibgassecurity.models.Vendedor;
 import com.softsaj.gibgassecurity.services.VendedorService;
 import java.net.URI;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Locale;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -85,6 +90,31 @@ public class VendedorController {
         //vendedor.setIdade(newvendedor.getIdade());
         //vendedor.setFoto(newvendedor.getFoto());
         Vendedor updateVendedor = vs.updateVendedor(vendedor);//s
+        return new ResponseEntity<>(updateVendedor, HttpStatus.OK);
+    }
+    
+    @PutMapping("/vendedor/update/escolheu/{id}")
+    public ResponseEntity<Vendedor> updateVVendedor(@PathVariable("id") Long id, @RequestBody Vendedor newvendedor
+            ,@RequestParam("token") String token){
+        
+        Locale locale = new Locale("pt","BR");
+                GregorianCalendar calendar = new GregorianCalendar();
+                SimpleDateFormat formatador1 = new SimpleDateFormat("YYYY-MM-dd",locale);
+                Date datehoje = new Date();
+                String hoje = formatador1.format(datehoje.getTime());
+                datehoje.setMonth((datehoje.getMonth() + 1) );
+                String menos30dias = formatador1.format(datehoje.getTime());
+               
+                System.out.println("Hoje: "+hoje+" inicio primeiro mes: "+menos30dias );
+        
+      //  newvendedor.setAmbiente(ambiente);
+      //  newvendedor.setSerie(serie);
+        newvendedor.setDatainicio(hoje);
+        newvendedor.setDatafim(menos30dias);
+        
+        
+        
+        Vendedor updateVendedor = vs.updateVendedor(newvendedor);//s
         return new ResponseEntity<>(updateVendedor, HttpStatus.OK);
     }
     

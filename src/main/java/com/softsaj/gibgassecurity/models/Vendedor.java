@@ -45,8 +45,27 @@ public class Vendedor {
     private String email;
     private String Certificado;
     private String  NumeroSérie;
-    private int  Ambiente;
-    private int série;
+    /*
+    0 - nenhum
+    1 - Free
+    2 - Medio
+    3 - Top*/
+     @Column(nullable = false, unique = false, length = 4)
+    private int  ambiente;
+     /*
+     0- nada
+    1 - Teste
+    2 - Vencido
+    3 - Pago*/
+     
+    @Column(nullable = false, unique = false, length = 4)
+    private int serie;
+    
+    @Column(nullable = false, unique = false, length = 35)
+     private String datainicio;
+    
+    @Column(nullable = false, unique = false, length = 35)
+     private String datafim;
     private String CódigoRegimeTributario;
     private String ICMS;
     private String PIS;
@@ -68,7 +87,7 @@ public class Vendedor {
         super();
     }
 
-    public Vendedor(Long id, String CNPJ, String nomefantasia, String descricao, String Cidade, String CEP, String CFOP, String razaosocial, String rua, String Bairro, String Numero, String Estado, String Uf, String telefone, String email, String Certificado, String NumeroSérie, int Ambiente, int série, String CódigoRegimeTributario, String ICMS, String PIS, String COFINS, String IPI, int CTipo, String CSenha, String CValidade, String NCM, String CST, String CodigoCity, String InscricaoEstadual, String IBPT, String IdToken, String CSC) {
+    public Vendedor(Long id, String CNPJ, String nomefantasia, String descricao, String Cidade, String CEP, String CFOP, String razaosocial, String rua, String Bairro, String Numero, String Estado, String Uf, String telefone, String email, String Certificado, String NumeroSérie, int ambiente, int serie, String datainicio, String datafim, String CódigoRegimeTributario, String ICMS, String PIS, String COFINS, String IPI, int CTipo, String CSenha, String CValidade, String NCM, String CST, String CodigoCity, String InscricaoEstadual, String IBPT, String IdToken, String CSC) {
         this.id = id;
         this.CNPJ = CNPJ;
         this.nomefantasia = nomefantasia;
@@ -86,8 +105,10 @@ public class Vendedor {
         this.email = email;
         this.Certificado = Certificado;
         this.NumeroSérie = NumeroSérie;
-        this.Ambiente = Ambiente;
-        this.série = série;
+        this.ambiente = ambiente;
+        this.serie = serie;
+        this.datainicio = datainicio;
+        this.datafim = datafim;
         this.CódigoRegimeTributario = CódigoRegimeTributario;
         this.ICMS = ICMS;
         this.PIS = PIS;
@@ -242,19 +263,35 @@ public class Vendedor {
     }
 
     public int getAmbiente() {
-        return Ambiente;
+        return ambiente;
     }
 
-    public void setAmbiente(int Ambiente) {
-        this.Ambiente = Ambiente;
+    public void setAmbiente(int ambiente) {
+        this.ambiente = ambiente;
     }
 
-    public int getSérie() {
-        return série;
+    public int getSerie() {
+        return serie;
     }
 
-    public void setSérie(int série) {
-        this.série = série;
+    public void setSerie(int serie) {
+        this.serie = serie;
+    }
+
+    public String getDatainicio() {
+        return datainicio;
+    }
+
+    public void setDatainicio(String datainicio) {
+        this.datainicio = datainicio;
+    }
+
+    public String getDatafim() {
+        return datafim;
+    }
+
+    public void setDatafim(String datafim) {
+        this.datafim = datafim;
     }
 
     public String getCódigoRegimeTributario() {
@@ -376,7 +413,7 @@ public class Vendedor {
     public void setCSC(String CSC) {
         this.CSC = CSC;
     }
-    
-    
+
+        
 
 }

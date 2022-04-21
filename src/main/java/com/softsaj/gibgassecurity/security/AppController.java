@@ -18,6 +18,7 @@ import com.softsaj.gibgassecurity.exception.UserNotFoundException;
 import com.softsaj.gibgassecurity.models.Evento;
 import com.softsaj.gibgassecurity.models.Notification;
 import com.softsaj.gibgassecurity.models.Person;
+import com.softsaj.gibgassecurity.models.Revendedor;
 import com.softsaj.gibgassecurity.models.Vendedor;
 import com.softsaj.gibgassecurity.security.UserRepository;
 import com.softsaj.gibgassecurity.security.AuthRequest;
@@ -117,6 +118,13 @@ public ResponseEntity<User> processRegister(@RequestBody User user) {
      user.setVerify(false);
     User newUser = userRepo.save(user);
     
+     Locale locale = new Locale("pt","BR");
+                GregorianCalendar calendar = new GregorianCalendar();
+                SimpleDateFormat formatador = new SimpleDateFormat("YYYY-MM-dd hh:mm:ssXXX",locale);
+                SimpleDateFormat formatador1 = new SimpleDateFormat("YYYY-MM-dd",locale);
+                Date d = new Date();
+                String data = formatador.format(d.getTime());
+    
     //SALVA MODEL
     if(user.getTipo().equals("1")){ //VENDEDOR
         Vendedor vendedor = new Vendedor();
@@ -125,11 +133,22 @@ public ResponseEntity<User> processRegister(@RequestBody User user) {
         vendedor.setRua("Rua dos Bobos");
         vendedor.setEmail(newUser.getEmail());
         vendedor.setTelefone("+55 (75) 9 88525220");
+        vendedor.setDatainicio(data);
+        vendedor.setDatafim(data);
+        vendedor.setAmbiente(0);
+        vendedor.setSerie(0);
         vendedor.setDescricao("Olá, sou "+vendedor.getNomefantasia()+" : Decisões: Se você não consegue decidir, a resposta é não. Se dois caminhos igualmente difíceis, escolha o mais doloroso a curto prazo (evitar a dor é criar uma ilusão de igualdade).");
         VendedorService.addVendedor(vendedor);
     }
-    if(user.getTipo().equals("2")){ //ENTREGADOR
+    if(user.getTipo().equals("2")){ //Revendedor
+        Revendedor r = new Revendedor();
+        r.setCodigo(user.getFirstName() + user.getLastName()+newUser.getId());
+        r.setEmail(newUser.getEmail());
+        r.setFirstName(user.getFirstName());
+        r.setId(newUser.getId());
+        r.setLastName(user.getLastName());
         
+        //revendedorservice.add(r);
     }
     if(user.getTipo().equals("3")){ //CLIENTE
          Person person = new Person();
@@ -143,12 +162,7 @@ public ResponseEntity<User> processRegister(@RequestBody User user) {
    
     
     
-     Locale locale = new Locale("pt","BR");
-                GregorianCalendar calendar = new GregorianCalendar();
-                SimpleDateFormat formatador = new SimpleDateFormat("YYYY-MM-dd hh:mm:ssXXX",locale);
-                SimpleDateFormat formatador1 = new SimpleDateFormat("YYYY-MM-dd",locale);
-                Date d = new Date();
-                String data = formatador.format(d.getTime());
+    
                 
      //Registro no sistema
      Evento evento = new Evento();
