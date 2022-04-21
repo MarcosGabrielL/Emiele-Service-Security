@@ -16,7 +16,7 @@ import javax.persistence.Table;
  * @author Marcos
  */
 @Entity
-@Table(name = "persons")
+@Table(name = "perfis")
 public class PerfilPagamento {
     
     @Id
