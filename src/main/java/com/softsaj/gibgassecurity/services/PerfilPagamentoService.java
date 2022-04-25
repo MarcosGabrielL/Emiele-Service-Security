@@ -33,6 +33,13 @@ public class PerfilPagamentoService {
                 .orElseThrow(() -> new UserNotFoundException("PerfilPagamento by id " + id + " was not found"));
     }
      
+     public PerfilPagamento findPerfilPagamentoByEmailUser(String id) {
+        return rp.userPerfilPagamento(id)
+                .orElseThrow(() -> new UserNotFoundException("PerfilPagamento by id " + id + " was not found"));
+    }
+     
+     
+     
      public PerfilPagamento addPerfilPagamento(PerfilPagamento cinefilo) {
         return rp.save(cinefilo);
     }

@@ -55,8 +55,16 @@ public class PerfilPagamentoController {
         return new ResponseEntity<>(perfil, HttpStatus.OK);
     }
     
-   
     
+    @GetMapping("/perfil/user/{email}")
+    public ResponseEntity<PerfilPagamento> getCienfiloByUser (@PathVariable("email") String email
+             ,@RequestParam("token") String token) {
+        
+       
+        
+        PerfilPagamento perfil = vs.findPerfilPagamentoByEmailUser(email);
+        return new ResponseEntity<>(perfil, HttpStatus.OK);
+    }
     
     
     @PostMapping("/perfil/add")
